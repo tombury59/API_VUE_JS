@@ -1,21 +1,26 @@
 <template>
-  <div class="modal-overlay">
-    <div class="login-modal">
-      <div class="modal-header">
-        <h3>Connexion</h3>
-        <button class="close-button" @click="$emit('close')">&times;</button>
+  <div class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+    <div class="bg-white rounded-lg w-11/12 max-w-md">
+      <div class="flex justify-between items-center p-4 border-b border-gray-100">
+        <h3 class="text-lg font-medium">Connexion</h3>
+        <button class="text-2xl text-green-900 hover:text-green-800" @click="$emit('close')">&times;</button>
       </div>
-      <div class="modal-content">
+      <div class="p-5">
         <form @submit.prevent="handleLogin">
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" v-model="email" required>
+          <div class="mb-4">
+            <label for="email" class="block mb-1 font-medium">Email</label>
+            <input type="email" id="email" v-model="email" required
+                   class="w-full p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600">
           </div>
-          <div class="form-group">
-            <label for="password">Mot de passe</label>
-            <input type="password" id="password" v-model="password" required>
+          <div class="mb-4">
+            <label for="password" class="block mb-1 font-medium">Mot de passe</label>
+            <input type="password" id="password" v-model="password" required
+                   class="w-full p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600">
           </div>
-          <button type="submit" class="login-submit">Se connecter</button>
+          <button type="submit"
+                  class="w-full py-3 mt-2.5 bg-[#1e3f29] hover:bg-[#0f5132] text-white rounded-md transition-colors">
+            Se connecter
+          </button>
         </form>
       </div>
     </div>
@@ -35,77 +40,3 @@ const handleLogin = () => {
   emit('close');
 };
 </script>
-
-<style scoped>
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 100;
-}
-
-.login-modal {
-  background-color: white;
-  border-radius: 10px;
-  width: 90%;
-  max-width: 400px;
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px;
-  border-bottom: 1px solid #eee;
-}
-
-.close-button {
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  color: #1e3f29;
-}
-
-.modal-content {
-  padding: 20px;
-}
-
-.form-group {
-  margin-bottom: 15px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: 500;
-}
-
-.form-group input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.login-submit {
-  width: 100%;
-  padding: 12px;
-  background-color: #1e3f29;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-.login-submit:hover {
-  background-color: #0f5132;
-}
-</style>

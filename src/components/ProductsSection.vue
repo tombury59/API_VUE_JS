@@ -25,8 +25,8 @@
     </div>
 
     <!-- Grille de produits -->
-    <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-10">
-      <div v-for="product in products" :key="product.id" class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 relative">
+    <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-10">
+      <div v-for="product in displayedProducts" :key="product.id" class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 relative">
         <div v-if="product.isNew" class="absolute top-4 left-4 bg-[#1e3f29] text-white py-1 px-2.5 rounded text-xs font-semibold z-10">
           Nouveau
         </div>
@@ -77,8 +77,11 @@
       </div>
     </div>
 
-    <div v-if="products.length > 0 && !loading" class="text-center mt-12">
-      <button class="bg-transparent border-2 border-[#1e3f29] text-[#1e3f29] py-3 px-7 text-base font-semibold rounded-md cursor-pointer transition-all duration-300 relative overflow-hidden hover:bg-[#1e3f29] hover:text-white">
+    <div v-if="products.length > 4 && !loading" class="text-center mt-12">
+      <button
+        @click="navigateToShop"
+        class="bg-transparent border-2 border-[#1e3f29] text-[#1e3f29] py-3 px-7 text-base font-semibold rounded-md cursor-pointer transition-all duration-300 relative overflow-hidden hover:bg-[#1e3f29] hover:text-white"
+      >
         Voir plus d'articles
       </button>
     </div>
@@ -91,13 +94,20 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
+import { useRouter } from 'vue-router';
 
 defineEmits(['add-to-cart']);
+const router = useRouter();
 
 const loading = ref(true);
 const error = ref('');
 const products = ref([]);
+
+// Limiter à 4 produits pour la page d'accueil
+const displayedProducts = computed(() => {
+  return products.value.slice(0, 4);
+});
 
 // Fonction pour formater le prix
 const formatPrice = (price) => {
@@ -110,6 +120,11 @@ const getDefaultImage = (id) => {
   const colors = ['1e3f29', '2a5a3d', '346c4c', '3e7e5a', '499169'];
   const colorIndex = id % colors.length;
   return `https://via.placeholder.com/300x400/${colors[colorIndex]}/FFFFFF?text=Mode+Verte`;
+};
+
+// Fonction pour naviguer vers la page Shop
+const navigateToShop = () => {
+  router.push('/shop');
 };
 
 // Fonction pour récupérer les produits depuis l'API

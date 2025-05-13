@@ -17,11 +17,11 @@
         href="#"
         :class="[
           'no-underline text-[#1e3f29] font-medium hover:text-[#0f5132] transition-colors',
-          { 'font-bold text-[#0f5132]': activeLink === 'shop' }
+          { 'font-bold text-[#0f5132]': activeLink === 'catalogue' }
         ]"
-        @click="setActiveLink('shop')"
+        @click="setActiveLink('catalogue')"
       >
-        SHOP
+        CATALOGUE
       </a>
       <a
         href="#"

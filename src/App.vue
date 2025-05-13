@@ -24,6 +24,14 @@
       @update-cart="updateCart"
     />
     <LoginModal v-if="showLoginModal" @close="showLoginModal = false" />
+
+    <!-- Ajout du composant Notification -->
+    <Notification
+      :show="showNotification"
+      :title="notificationTitle"
+      :message="notificationMessage"
+      @close="showNotification = false"
+    />
   </div>
 </template>
 
@@ -34,12 +42,18 @@ import HeroSection from './components/HeroSection.vue';
 import ProductsSection from './components/ProductsSection.vue';
 import CartModal from './components/CartModal.vue';
 import LoginModal from './components/LoginModal.vue';
+import Notification from './components/Notification.vue';
 
 const activeLink = ref('home');
 const showCart = ref(false);
 const showLoginModal = ref(false);
 const productsSection = ref(null);
 const cartItems = ref([]);
+
+// États pour la notification
+const showNotification = ref(false);
+const notificationTitle = ref('Produit ajouté');
+const notificationMessage = ref('');
 
 // Calculer le nombre total d'articles dans le panier
 const cartCount = computed(() => {
@@ -73,8 +87,9 @@ const addToCart = (product) => {
     });
   }
 
-  // Notification
-  alert(`${product.title} ajouté au panier !`);
+  // Utiliser la notification au lieu de l'alerte
+  notificationMessage.value = `${product.title} ajouté au panier !`;
+  showNotification.value = true;
 };
 
 const scrollToProducts = () => {
