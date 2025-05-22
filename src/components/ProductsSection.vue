@@ -133,7 +133,10 @@ const fetchProducts = async () => {
     loading.value = true;
     error.value = '';
 
-    const response = await fetch('http://185.98.138.168:8080/products');
+    //const response = await fetch('http://185.98.138.168:8080/products');
+
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+    const response = await fetch(`${apiUrl}/products`);
 
     if (!response.ok) {
       throw new Error(`Erreur ${response.status}: ${response.statusText}`);
