@@ -134,8 +134,6 @@ const fetchProducts = async () => {
     error.value = '';
 
     const response = await fetch('/api/products');
-    const data = await response.json();
-    products.value = data;
 
     if (!response.ok) {
       throw new Error(`Erreur ${response.status}: ${response.statusText}`);
