@@ -1,4 +1,4 @@
-<template>
+<template >
   <header class="py-5 flex items-center justify-between flex-wrap">
     <div class="text-2xl font-bold italic">Open Fashion</div>
     <!-- Burger menu button (mobile) -->
@@ -25,7 +25,9 @@
         to="/"
         :class="[
           'block md:inline no-underline text-[#1e3f29] font-medium hover:text-[#0f5132] transition-colors px-2 py-2',
-          { 'font-bold text-[#0f5132]': activeLink === 'home' }
+          { 
+            'font-bold text-[#0f5132] border-b-2 border-[#0f5132]': activeLink === 'home'
+          }
         ]"
         @click.native="setActiveLink('home'); menuOpen = false"
       >
@@ -35,7 +37,9 @@
         to="/catalogue"
         :class="[
           'block md:inline no-underline text-[#1e3f29] font-medium hover:text-[#0f5132] transition-colors px-2 py-2',
-          { 'font-bold text-[#0f5132]': activeLink === 'catalogue' }
+          { 
+            'font-bold text-[#0f5132] border-b-2 border-[#0f5132]': activeLink === 'catalogue'
+          }
         ]"
         @click.native="setActiveLink('catalogue'); menuOpen = false"
       >
@@ -45,7 +49,9 @@
         href="#"
         :class="[
           'block md:inline no-underline text-[#1e3f29] font-medium hover:text-[#0f5132] transition-colors px-2 py-2',
-          { 'font-bold text-[#0f5132]': activeLink === 'contact' }
+          { 
+            'font-bold text-[#0f5132] border-b-2 border-[#0f5132]': activeLink === 'contact'
+          }
         ]"
         @click="setActiveLink('contact'); menuOpen = false"
       >

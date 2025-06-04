@@ -1,5 +1,20 @@
 <template>
     <main class="flex flex-col items-center justify-center min-h-[70vh] px-4 py-12 ">
+        <nav class="w-full max-w-4xl mb-6" aria-label="Fil d'Ariane">
+            <ol class="flex text-sm text-[#3e7e5a] gap-2">
+                <li>
+                    <router-link to="/" class="hover:underline">Accueil</router-link>
+                    <span class="mx-2">/</span>
+                </li>
+                <li>
+                    <router-link to="/catalogue" class="hover:underline">Catalogue</router-link>
+                    <span class="mx-2">/</span>
+                </li>
+                <li class="text-[#1e3f29] font-semibold truncate max-w-[200px]">
+                    {{ product?.title || 'Produit' }}
+                </li>
+            </ol>
+        </nav>
         <div
             v-if="product"
             class="w-full max-w-4xl bg-white rounded-3xl shadow-2xl flex flex-col md:flex-row gap-10 p-10 transition-all duration-300"

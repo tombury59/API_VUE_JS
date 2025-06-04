@@ -32,8 +32,8 @@
       <div>
         <div class="font-bold mb-3 text-emerald-100">SHOP</div>
         <ul class="space-y-2">
-          <li><router-link to="/catalogue" class="hover:text-emerald-300 transition">Catalogue</router-link></li>
           <li><router-link to="/" class="hover:text-emerald-300 transition">Accueil</router-link></li>
+          <li><router-link to="/catalogue" class="hover:text-emerald-300 transition">Catalogue</router-link></li>
           <li><a href="#" class="hover:text-emerald-300 transition">Nouveautés</a></li>
           <li><a href="#" class="hover:text-emerald-300 transition">Promotions</a></li>
         </ul>
@@ -42,7 +42,7 @@
       <div>
         <div class="font-bold mb-3 text-emerald-100">COMPAGNIE</div>
         <ul class="space-y-2">
-          <li><router-link to="/about" class="hover:text-emerald-300 transition">À propos</router-link></li>
+          <li><router-link to="/register" class="hover:text-emerald-300 transition">S'enregister</router-link></li>
           <li><a href="#" class="hover:text-emerald-300 transition">Contact</a></li>
           <li><a href="#" class="hover:text-emerald-300 transition">Actualités</a></li>
           <li><a href="#" class="hover:text-emerald-300 transition">Support</a></li>
