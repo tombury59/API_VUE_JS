@@ -22,21 +22,33 @@
             Se connecter
           </button>
         </form>
+        <div class="flex justify-between mt-6">
+          <button @click="$emit('close')" class="text-[#1e3f29] underline">Annuler</button>
+          <button @click="goToRegister" class="text-[#3e7e5a] underline font-semibold">S'enregistrer</button>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
-const email = ref('');
-const password = ref('');
-const emit = defineEmits(['close']);
+const email = ref('')
+const password = ref('')
+const emit = defineEmits(['close'])
+
+const router = useRouter()
 
 const handleLogin = () => {
   // Logique de connexion à implémenter
-  console.log('Tentative de connexion avec:', email.value);
-  emit('close');
-};
+  console.log('Tentative de connexion avec:', email.value)
+  emit('close')
+}
+
+const goToRegister = () => {
+  emit('close')
+  router.push('/register')
+}
 </script>

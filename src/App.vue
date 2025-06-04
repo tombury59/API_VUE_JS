@@ -8,14 +8,12 @@
       @open-login="showLoginModal = true"
     />
 
-    <main>
-      <HeroSection @scroll-to-products="scrollToProducts" />
-
-      <ProductsSection
-        ref="productsSection"
-        @add-to-cart="addToCart"
-      />
-    </main>
+    <router-view
+      :cart-items="cartItems"
+      @add-to-cart="addToCart"
+      @update-cart="updateCart"
+      @scroll-to-products="scrollToProducts"
+    />
 
     <CartModal
       v-if="showCart"
@@ -25,14 +23,15 @@
     />
     <LoginModal v-if="showLoginModal" @close="showLoginModal = false" />
 
-    <!-- Ajout du composant Notification -->
     <Notification
       :show="showNotification"
       :title="notificationTitle"
       :message="notificationMessage"
       @close="showNotification = false"
     />
+
   </div>
+  <Footer />
 </template>
 
 <script setup>
@@ -43,6 +42,7 @@ import ProductsSection from './components/ProductsSection.vue';
 import CartModal from './components/CartModal.vue';
 import LoginModal from './components/LoginModal.vue';
 import Notification from './components/Notification.vue';
+import Footer from './components/Footer.vue'
 
 const activeLink = ref('home');
 const showCart = ref(false);

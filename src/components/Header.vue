@@ -1,41 +1,59 @@
 <template>
-  <header class="py-5 flex items-center justify-between">
+  <header class="py-5 flex items-center justify-between flex-wrap">
     <div class="text-2xl font-bold italic">Open Fashion</div>
-
-    <div class="flex gap-8">
-      <a
-        href="#"
+    <!-- Burger menu button (mobile) -->
+    <button
+      class="md:hidden flex items-center px-3 py-2 border rounded text-[#1e3f29] border-[#1e3f29]"
+      @click="menuOpen = !menuOpen"
+      aria-label="Toggle navigation"
+    >
+      <svg class="fill-current h-5 w-5" viewBox="0 0 20 20">
+        <path
+          d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"
+        />
+      </svg>
+    </button>
+    <!-- Navigation links -->
+    <nav
+      :class="[
+        'w-full md:w-auto md:flex gap-8 items-center',
+        menuOpen ? 'block' : 'hidden',
+        'md:block'
+      ]"
+    >
+      <router-link
+        to="/"
         :class="[
-          'no-underline text-[#1e3f29] font-medium hover:text-[#0f5132] transition-colors',
+          'block md:inline no-underline text-[#1e3f29] font-medium hover:text-[#0f5132] transition-colors px-2 py-2',
           { 'font-bold text-[#0f5132]': activeLink === 'home' }
         ]"
-        @click="setActiveLink('home')"
+        @click.native="setActiveLink('home'); menuOpen = false"
       >
         HOME
-      </a>
-      <a
-        href="#"
+      </router-link>
+      <router-link
+        to="/catalogue"
         :class="[
-          'no-underline text-[#1e3f29] font-medium hover:text-[#0f5132] transition-colors',
+          'block md:inline no-underline text-[#1e3f29] font-medium hover:text-[#0f5132] transition-colors px-2 py-2',
           { 'font-bold text-[#0f5132]': activeLink === 'catalogue' }
         ]"
-        @click="setActiveLink('catalogue')"
+        @click.native="setActiveLink('catalogue'); menuOpen = false"
       >
         CATALOGUE
-      </a>
+      </router-link>
       <a
         href="#"
         :class="[
-          'no-underline text-[#1e3f29] font-medium hover:text-[#0f5132] transition-colors',
+          'block md:inline no-underline text-[#1e3f29] font-medium hover:text-[#0f5132] transition-colors px-2 py-2',
           { 'font-bold text-[#0f5132]': activeLink === 'contact' }
         ]"
-        @click="setActiveLink('contact')"
+        @click="setActiveLink('contact'); menuOpen = false"
       >
         CONTACT
       </a>
-    </div>
-
-    <div class="flex gap-4 items-center">
+    </nav>
+    <!-- Cart & Login -->
+    <div class="flex gap-4 items-center mt-4 md:mt-0">
       <div class="relative cursor-pointer" @click="$emit('toggle-cart')">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M9 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"></path>
@@ -46,7 +64,6 @@
           {{ cartCount }}
         </span>
       </div>
-
       <button
         class="px-5 py-2 border border-[#1e3f29] bg-transparent text-[#1e3f29] cursor-pointer transition-all duration-300 hover:bg-[#1e3f29] hover:text-white"
         @click="$emit('open-login')"
@@ -58,6 +75,8 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
+
 defineProps({
   activeLink: {
     type: String,
@@ -74,4 +93,6 @@ const emit = defineEmits(['set-active', 'toggle-cart', 'open-login']);
 const setActiveLink = (link) => {
   emit('set-active', link);
 };
+
+const menuOpen = ref(false);
 </script>

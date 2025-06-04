@@ -1,9 +1,9 @@
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+import HomeSection from '../components/HomeSection.vue'
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <HomeSection @add-to-cart="$emit('add-to-cart', $event)" />
   </main>
 </template>
