@@ -48,7 +48,7 @@
           <div class="dog-container">
             <div class="dog-glow"></div>
             <img
-              src="https://img.firexcode.com/dog-birthday-cake.jpg"
+              src="@/assets/swan.png"
               alt="Chien avec une bougie sur le nez"
               class="konami-dog"
               onerror="this.src='https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=200&h=200&fit=crop&crop=faces'"
@@ -126,6 +126,7 @@ const showCart = ref(false);
 const showLoginModal = ref(false);
 const productsSection = ref(null);
 const cartItems = ref([]);
+let notificationTimeout = null;
 
 // Konami code amélioré avec debug
 const showKonami = ref(false);
@@ -243,8 +244,13 @@ const addToCart = (product) => {
   }
   saveCart();
   notificationMessage.value = `${product.title} ajouté au panier !`;
-  showNotification.value = true;
-};
+    showNotification.value = true;
+    // Ajoute ce bloc pour auto-hide
+    if (notificationTimeout) clearTimeout(notificationTimeout);
+    notificationTimeout = setTimeout(() => {
+      showNotification.value = false;
+    }, 3000); // 3 secondes
+  };
 
 const scrollToProducts = () => {
   productsSection.value?.$el.scrollIntoView({ behavior: 'smooth' });

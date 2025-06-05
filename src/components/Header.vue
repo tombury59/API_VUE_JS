@@ -45,18 +45,7 @@
       >
         CATALOGUE
       </router-link>
-      <a
-        href="#"
-        :class="[
-          'block md:inline no-underline text-[#1e3f29] font-medium hover:text-[#0f5132] transition-colors px-2 py-2',
-          { 
-            'font-bold text-[#0f5132] border-b-2 border-[#0f5132]': activeLink === 'contact'
-          }
-        ]"
-        @click="setActiveLink('contact'); menuOpen = false"
-      >
-        CONTACT
-      </a>
+
     </nav>
     <!-- Cart & Login/Logout -->
     <div class="flex gap-4 items-center mt-4 md:mt-0">

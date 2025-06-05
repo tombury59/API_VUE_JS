@@ -1,3 +1,35 @@
+<script setup>
+import { ref, onMounted } from 'vue'
+import { deleteMyAccount } from '../../api/delAccount.js'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const hasToken = ref(false)
+
+const updateHasToken = () => {
+  hasToken.value = !!localStorage.getItem('token')
+}
+
+onMounted(() => {
+  updateHasToken()
+  window.addEventListener('storage', updateHasToken)
+})
+
+// Appelle cette fonction lors de la déconnexion dans ton app principale aussi !
+const handleDeleteAccount = async () => {
+  if (confirm('Voulez-vous vraiment supprimer votre compte ? Cette action est irréversible.')) {
+    try {
+      await deleteMyAccount()
+      updateHasToken() // MAJ immédiate après suppression
+      router.push('/')
+      // Pas besoin de window.location.reload()
+    } catch (e) {
+      // Affiche une notification design ici si besoin
+    }
+  }
+}
+</script>
+
 <template>
   <footer class="bg-[#1e3f29] text-white pt-12 pb-6 px-4">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:justify-between gap-10">
@@ -57,13 +89,16 @@
         
       </div>
     </div>
-    <div class="border-t border-emerald-200 my-8"></div>
+   <div class="border-t border-emerald-200 my-8"></div>
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-sm text-emerald-100 gap-2">
       <div class="mb-2 md:mb-0">&copy; {{ new Date().getFullYear() }} Open Fashion</div>
       <div class="flex flex-col sm:flex-row gap-2 sm:gap-6 text-center">
-        <a href="#" class="hover:text-white">Conditions</a>
-        <a href="#" class="hover:text-white">Confidentialité</a>
-        <a href="#" class="hover:text-white">Cookies</a>
+        <a
+          v-if="hasToken"
+          href="#"
+          class="text-red-600 hover:text-white"
+          @click.prevent="handleDeleteAccount"
+        >Supprimer le compte</a>
       </div>
     </div>
   </footer>
