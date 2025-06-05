@@ -7,6 +7,9 @@
       </div>
       <div class="p-5">
         <form @submit.prevent="handleLogin">
+          <div v-if="errorMessage" class="mb-4 p-3 rounded bg-red-100 text-red-700 border border-red-300">
+            {{ errorMessage }}
+          </div>
           <div class="mb-4">
             <label for="username" class="block mb-1 font-medium">Username</label>
             <input type="username" id="username" v-model="username" required
@@ -36,11 +39,13 @@ import { useRouter } from 'vue-router'
 
 const username = ref('')
 const password = ref('')
+const errorMessage = ref('')
 const emit = defineEmits(['close'])
 
 const router = useRouter()
 
 const handleLogin = async () => {
+  errorMessage.value = ''
   try {
     const response = await fetch('/api/auth/connection', {
       method: 'POST',
@@ -58,7 +63,7 @@ const handleLogin = async () => {
     window.dispatchEvent(new Event('storage'));
     emit('close');
   } catch (e) {
-    alert(e.message);
+    errorMessage.value = e.message;
   }
 }
 
