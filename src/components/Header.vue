@@ -1,4 +1,5 @@
 <template >
+
   <header class="py-5 flex items-center justify-between flex-wrap">
     <div class="text-2xl font-bold italic">Open Fashion</div>
     <!-- Burger menu button (mobile) -->
