@@ -22,6 +22,16 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/products/, '/products'),
       },
+      '/api/auth/connection': {
+        target: 'http://185.98.138.168:8080',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/auth\/connection/, '/auth/login'),
+      },
+      '/api/auth/register': {
+        target: 'http://185.98.138.168:8080',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/auth\/register/, '/users'),
+      },
     },
   },
 })

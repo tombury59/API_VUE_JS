@@ -58,7 +58,7 @@
         CONTACT
       </a>
     </nav>
-    <!-- Cart & Login -->
+    <!-- Cart & Login/Logout -->
     <div class="flex gap-4 items-center mt-4 md:mt-0">
       <div class="relative cursor-pointer" @click="$emit('toggle-cart')">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -70,18 +70,28 @@
           {{ cartCount }}
         </span>
       </div>
-      <button
-        class="px-5 py-2 border border-[#1e3f29] bg-transparent text-[#1e3f29] cursor-pointer transition-all duration-300 hover:bg-[#1e3f29] hover:text-white"
-        @click="$emit('open-login')"
-      >
-        LOGIN
-      </button>
+      <template v-if="isLoggedIn">
+          <span class="text-[#1e3f29] font-semibold">{{ username }}</span>
+          <button
+            class="px-5 py-2 border border-[#1e3f29] bg-transparent text-[#1e3f29] cursor-pointer transition-all duration-300 hover:bg-[#1e3f29] hover:text-white"
+            @click="logout"
+          >
+            LOGOUT
+          </button>
+        </template>
+        <button
+          v-else
+          class="px-5 py-2 border border-[#1e3f29] bg-transparent text-[#1e3f29] cursor-pointer transition-all duration-300 hover:bg-[#1e3f29] hover:text-white"
+          @click="$emit('open-login')"
+        >
+          LOGIN
+        </button>
     </div>
   </header>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
 defineProps({
   activeLink: {
@@ -101,4 +111,25 @@ const setActiveLink = (link) => {
 };
 
 const menuOpen = ref(false);
+
+// Auth logic
+const username = ref('');
+const isLoggedIn = ref(false);
+
+const checkAuth = () => {
+  username.value = localStorage.getItem('username') || '';
+  isLoggedIn.value = !!localStorage.getItem('token');
+};
+
+const logout = () => {
+  localStorage.removeItem('token');
+  localStorage.removeItem('username');
+  localStorage.removeItem('cart'); // <-- Ajoute cette ligne
+  username.value = '';
+  isLoggedIn.value = false;
+  window.dispatchEvent(new Event('storage'));
+};
+
+onMounted(checkAuth);
+window.addEventListener('storage', checkAuth);
 </script>

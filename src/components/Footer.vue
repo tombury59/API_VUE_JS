@@ -2,10 +2,10 @@
   <footer class="bg-[#1e3f29] text-white pt-12 pb-6 px-4">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:justify-between gap-10">
       <!-- Logo & Social -->
-      <div>
+      <div class="flex flex-col items-center md:items-start text-center md:text-left">
         <div class="text-3xl font-extrabold italic mb-2">Open Fashion</div>
         <div class="mb-4 text-emerald-200">Social Media</div>
-        <div class="flex gap-3">
+        <div class="flex gap-3 justify-center md:justify-start">
           <a href="#" aria-label="Facebook" class="hover:text-emerald-300 transition">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -29,42 +29,38 @@
         </div>
       </div>
       <!-- Shop -->
-      <div>
+      <div class="flex flex-col items-center md:items-start text-center md:text-left">
         <div class="font-bold mb-3 text-emerald-100">SHOP</div>
         <ul class="space-y-2">
           <li><router-link to="/" class="hover:text-emerald-300 transition">Accueil</router-link></li>
           <li><router-link to="/catalogue" class="hover:text-emerald-300 transition">Catalogue</router-link></li>
-          <li><a href="#" class="hover:text-emerald-300 transition">Nouveautés</a></li>
-          <li><a href="#" class="hover:text-emerald-300 transition">Promotions</a></li>
         </ul>
       </div>
       <!-- Company -->
-      <div>
+      <div class="flex flex-col items-center md:items-start text-center md:text-left">
         <div class="font-bold mb-3 text-emerald-100">COMPAGNIE</div>
         <ul class="space-y-2">
           <li><router-link to="/register" class="hover:text-emerald-300 transition">S'enregister</router-link></li>
-          <li><a href="#" class="hover:text-emerald-300 transition">Contact</a></li>
-          <li><a href="#" class="hover:text-emerald-300 transition">Actualités</a></li>
-          <li><a href="#" class="hover:text-emerald-300 transition">Support</a></li>
         </ul>
       </div>
       <!-- Newsletter -->
-      <div>
-        <div class="font-bold mb-3 text-emerald-100">RESTEZ INFORMÉ</div>
-        <form class="flex">
-          <input type="email" placeholder="Votre email"
-            class="rounded-l px-3 py-2 text-[#1e3f29] focus:outline-none" />
-          <button type="submit"
-            class="bg-emerald-200 text-[#1e3f29] px-4 py-2 rounded-r font-semibold hover:bg-emerald-300 transition">
-            SOUMETTRE
-          </button>
-        </form>
+      <div class="flex flex-col items-center md:items-start text-center md:text-left w-full md:w-auto">
+        <div class="mt-8 flex justify-center">
+          <span class="text-xs text-emerald-200 opacity-70 flex items-center gap-1 select-none">
+            <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2v2m0 0c0 1.104-.896 2-2 2s-2-.896-2-2 2-4 2-4 2 2.896 2 4zm0 0c0 1.104.896 2 2 2s2-.896 2-2-2-4-2-4-2 2.896-2 4zM4 10v6a8 4 0 0016 0v-6M4 10a8 4 0 0116 0M4 10a8 4 0 0016 0" />
+              <line x1="4" y1="16" x2="20" y2="16" stroke-width="2" stroke-linecap="round" />
+            </svg>
+            ↑ ↑ ↓ ↓ ← → ← → B A
+          </span>
+        </div>
+        
       </div>
     </div>
     <div class="border-t border-emerald-200 my-8"></div>
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-sm text-emerald-100 gap-2">
-      <div>&copy; {{ new Date().getFullYear() }} Open Fashion</div>
-      <div class="flex gap-6">
+      <div class="mb-2 md:mb-0">&copy; {{ new Date().getFullYear() }} Open Fashion</div>
+      <div class="flex flex-col sm:flex-row gap-2 sm:gap-6 text-center">
         <a href="#" class="hover:text-white">Conditions</a>
         <a href="#" class="hover:text-white">Confidentialité</a>
         <a href="#" class="hover:text-white">Cookies</a>

@@ -158,6 +158,12 @@ const removeItem = (index) => {
 
 // Passer à la commande
 const checkout = () => {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    emit('close');
+    window.dispatchEvent(new CustomEvent('open-login'));
+    return;
+  }
   alert('Redirection vers la page de paiement...');
   // Logique de redirection vers la page de paiement
 };
